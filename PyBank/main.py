@@ -3,7 +3,6 @@ Print a summary of the budget data, reading from csv file
 """
 
 import csv  # The budget data is saved in a csv file
-import os   # os.join uses 
 
 # Budget data filepath
 filepath = "C:/Users/Tolga/Dropbox/GitHub/python-challenge/PyBank/Resources/budget_data.csv"
@@ -64,12 +63,11 @@ print("Greatest Increase in Profits: %s ($%d)" % (max_increase_month, max_increa
 print("Greatest Decrease in Profits: %s ($%d)" % (max_decrease_month, max_decrease))
 
 # Print results to a file
-f = open("PyBank/analysis/pybank_analysis.txt", "w")
-f.write("Financial Analysis\n")
-f.write("--------------\n")
-f.write("Total Months: %d\n" % (count_month))
-f.write("Total: $%d\n" % (total))
-f.write("Average Change: $%.2f\n" % (average_change))
-f.write("Greatest Increase in Profits: %s ($%d)\n" % (max_increase_month, max_increase))
-f.write("Greatest Decrease in Profits: %s ($%d)\n" % (max_decrease_month, max_decrease))
-f.close()
+with open("PyBank/analysis/pybank_analysis.txt", "w") as outfile:
+    outfile.write("Financial Analysis\n")
+    outfile.write("--------------\n")
+    outfile.write("Total Months: %d\n" % (count_month))
+    outfile.write("Total: $%d\n" % (total))
+    outfile.write("Average Change: $%.2f\n" % (average_change))
+    outfile.write("Greatest Increase in Profits: %s ($%d)\n" % (max_increase_month, max_increase))
+    outfile.write("Greatest Decrease in Profits: %s ($%d)\n" % (max_decrease_month, max_decrease))
