@@ -58,5 +58,18 @@ print("---------------")
 print("Total Months: %d" % (count_month))
 print("Total: $%d" % (total))
 print("Average Change: $%.2f" % (average_change))
+# By definition, average change can be obtained from the differnce between last and first profit value
+print("Average Change (from last - first) %.2f" % ((profit_ar[-1] - profit_ar[0])/(count_month-1)))
 print("Greatest Increase in Profits: %s ($%d)" % (max_increase_month, max_increase))
 print("Greatest Decrease in Profits: %s ($%d)" % (max_decrease_month, max_decrease))
+
+# Print results to a file
+f = open("PyBank/analysis/pybank_analysis.txt", "w")
+f.write("Financial Analysis\n")
+f.write("--------------\n")
+f.write("Total Months: %d\n" % (count_month))
+f.write("Total: $%d\n" % (total))
+f.write("Average Change: $%.2f\n" % (average_change))
+f.write("Greatest Increase in Profits: %s ($%d)\n" % (max_increase_month, max_increase))
+f.write("Greatest Decrease in Profits: %s ($%d)\n" % (max_decrease_month, max_decrease))
+f.close()
