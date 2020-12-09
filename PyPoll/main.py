@@ -2,7 +2,29 @@
 Print a summary of the election results
 """
 
-def print_summary(pout, text):
+def print_summary(pout, vote_count):
+    # Text to write for results
+    text = "Election Results\n"
+    text += "---------------\n"
+    text += "Total Votes: %d\n" % (total_votes)
+    text += "---------------\n"
+
+    winner = None   # Initial value of the winner is None
+    # Run through each candidate to find the winner
+    for candidate in vote_count.keys():
+        if winner is not None:
+            if (vote_count[candidate] > vote_count[winner]):    # candidate has a higher vote count
+                winner = candidate
+        else:
+            winner = candidate
+
+        # Print each candidate
+        text += "%s: %.3f %% (%d)\n" % (candidate, vote_count[candidate]/total_votes*100, vote_count[candidate])
+
+    text += "---------------\n"
+    text += "Winner: %s\n" % (winner)
+    text += "---------------\n"
+
     if pout is None:
         print(text)
     else:
@@ -39,31 +61,9 @@ with open(filepath, mode="r") as csvfile:
         except:
             vote_count[candidate] = 1      # The first time introduction of the candidate to the dictionary
 
-# Text to write for results
-text = "Election Results\n"
-text += "---------------\n"
-text += "Total Votes: %d\n" % (total_votes)
-text += "---------------\n"
-
-winner = None   # Initial value of the winner is None
-# Run through each candidate to find the winner
-for candidate in vote_count.keys():
-    if winner is not None:
-        if (vote_count[candidate] > vote_count[winner]):    # candidate has a higher vote count
-            winner = candidate
-    else:
-        winner = candidate
-
-    # Print each candidate
-    text += "%s: %.3f %% (%d)\n" % (candidate, vote_count[candidate]/total_votes*100, vote_count[candidate])
-
-text += "---------------\n"
-text += "Winner: %s\n" % (winner)
-text += "---------------\n"
-
 # Print summary to standart output
-print_summary(None, text)
+print_summary(None, vote_count)
 
 # Print summary to a file
 with open("PyPoll/analysis/pypoll_analysis.txt", "w") as fout:
-    print_summary(fout, text)
+    print_summary(fout, vote_count)
